@@ -1,6 +1,10 @@
-package min_time_to_type
+package main
 
 import "fmt"
+
+func main() {
+	minTimeToType("abc")
+}
 
 type ListNode struct {
 	Next *ListNode
@@ -8,9 +12,9 @@ type ListNode struct {
 	Val  rune
 }
 
-func MinTimeToType(word string) int {
+func minTimeToType(word string) int {
 	time := 0
-	current := NewLinkedList() // a
+	current := NewLinkedList() // current pointer at "a"
 
 	for _, r := range word {
 		fmt.Printf("Letter: %c \n", r)
@@ -65,7 +69,6 @@ func NewLinkedList() *ListNode {
 	}
 	sentinelNode.Next.Prev = current // a.Prev = z
 	current.Next = sentinelNode.Next // z.Next = a
-
 
 	current = sentinelNode.Next // a
 	for i := 0; i < 26; i++ {
