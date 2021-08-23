@@ -1,8 +1,19 @@
-package min_depth
+/*
+Given a binary tree, find its minimum depth.
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+Note: A leaf is a node with no children.
+
+https://leetcode.com/problems/minimum-depth-of-binary-tree/
+*/
+package main
 
 import (
 	"container/list"
 )
+
+func main() {
+
+}
 
 type TreeNode struct {
 	Val   int
@@ -10,15 +21,10 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- * Possible memory leak when q = q[1:]
- */
+/*
+Queue (BFS) implementation.
+Possible memory leak when q = q[1:]
+*/
 func minDepth(root *TreeNode) int {
 	if root == nil {
 		return 0
@@ -72,7 +78,7 @@ func minDepth2(root *TreeNode) int {
 			first := q.Front()
 			node := first.Value
 			q.Remove(first)
-			
+
 			switch node := node.(type) {
 			case *TreeNode:
 				// fmt.Printf("%+v %+v \n", node.Left, node.Right)
