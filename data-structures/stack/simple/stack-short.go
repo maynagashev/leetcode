@@ -4,7 +4,9 @@ https://stackoverflow.com/questions/28541609/looking-for-reasonable-stack-implem
 */
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	s := stack([]int{})
@@ -14,7 +16,11 @@ func main() {
 	fmt.Println("Stack:", s)
 	fmt.Println("Pop:", s.Pop(), s.Pop(), s.Pop())
 
-	fmt.Println(s.Pop()) // panic: runtime error: index out of range [-1]x
+	if s.isEmpty() {
+		fmt.Println("Empty stack")
+	} else {
+		fmt.Println(s.Pop())
+	}
 }
 
 type stack []int
@@ -22,9 +28,11 @@ type stack []int
 func (s *stack) Push(v int) {
 	*s = append(*s, v)
 }
-
 func (s *stack) Pop() int {
 	res := (*s)[len(*s)-1]
 	*s = (*s)[:len(*s)-1]
 	return res
+}
+func (s *stack) isEmpty() bool {
+	return len(*s) == 0
 }
