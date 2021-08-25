@@ -1,3 +1,3 @@
-# 100 days of leetcode
+# N days of leetcode
 
 - [leetcode.com/maynagashev](https://leetcode.com/maynagashev/)
