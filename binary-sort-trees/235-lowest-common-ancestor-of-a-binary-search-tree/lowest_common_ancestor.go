@@ -25,3 +25,13 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	}
 	return root
 }
+
+func lowestCommonAncestorRecursive(root, p, q *TreeNode) *TreeNode {
+	if p.Val < root.Val && q.Val < root.Val {
+		return lowestCommonAncestorRecursive(root.Left, p, q)
+	}
+	if p.Val > root.Val && q.Val > root.Val {
+		return lowestCommonAncestorRecursive(root.Right, p, q)
+	}
+	return root
+}
