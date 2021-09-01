@@ -1,7 +1,12 @@
 package main
 
-func main() {
+import (
+	"fmt"
+	"math"
+)
 
+func main() {
+	fmt.Println(123, reverse(123))
 }
 
 func reverse(x int) int {
@@ -12,7 +17,9 @@ func reverse(x int) int {
 		s =  s * 10 + t
 	}
 
-	if s < -2147483648 || s > 2147483647 {
+	//fmt.Println(math.MinInt32, math.MaxInt32)
+	//fmt.Println(-2147483648, 2147483647)
+	if s < math.MinInt32 || s > math.MaxInt32 {
 		return 0
 	}
 	return s
