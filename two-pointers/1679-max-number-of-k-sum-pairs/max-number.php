@@ -1,33 +1,34 @@
 <?php
 class Solution {
-
     /**
+     *
      * @param Integer[] $nums
      * @param Integer $k
      * @return Integer
+     * 3, 1, 3, 4, 3
+     * 1, 2, 3, 4
      */
     function maxOperations($nums, $k) {
-        $max = 0;
-        while($this->hasPairs($nums, $k)){
-            $max++;
-        }
-        return $max;
-    }
+        $numFreq = [];
+        $operations = 0;
 
-    function hasPairs(&$nums, &$k) {
-        foreach($nums as $i => $v1){
-            foreach($nums as $j => $v2){
-                if ($i == $j) {
-                    continue;
-                }
-                // если сумма найдена, удаляем элементы
-                if ($v1+$v2 == $k) {
-                    unset($nums[$i]);
-                    unset($nums[$j]);
-                    return true;
+        foreach ($nums as $num) {
+            $complement = $k - $num;
+
+            // Если комплимент уже встречался ранее и доступен, засчитываем операцию, берем след элемент
+            if (isset($numFreq[$complement]) && $numFreq[$complement] > 0) {
+                $operations++;
+                $numFreq[$complement]--;
+                // если комплимент ранее не встречался, добавляем текущий элемент в копилку и идем дальше
+            } else {
+                if (isset($numFreq[$num])) {
+                    $numFreq[$num]++;
+                } else {
+                    $numFreq[$num] = 1;
                 }
             }
         }
-        return false;
+
+        return $operations;
     }
 }
