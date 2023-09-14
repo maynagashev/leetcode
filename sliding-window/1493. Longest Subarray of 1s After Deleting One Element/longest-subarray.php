@@ -1,44 +1,47 @@
 <?php
+
 class Solution {
 
     /**
      * @param Integer[] $nums
      * @return Integer
+     * 121ms (89,74%) 28.85MB (87,18%)
      */
     function longestSubarray($nums) {
         $max = 0;
         $left = 0;
         $right = 0;
-        $size = 0;
-        $excluded = 0;
+        $excluded = -1;
+
         while ($right < count($nums)) {
+            // $row = '';
+
+            // очередная единичка
             if ($nums[$right]==1) {
-                $size++;
-                if ($size>$max) {
-                    $max = $size;
-                }
+                $max = max($max, $right - $left + intval($excluded<$left));
             }
+
+            // очередной ноль
             if ($nums[$right]==0) {
                 // если excluded не в окне, один ноль можем пропустить
-                if ($excluded<=$left) {
+                if ($excluded<$left) {
+                    // исключаем текущий 0 и переходим на следующую итерацию
                     $excluded=$right;
 
-                    // если excluded в окне, двигаем left до него
+                    // если excluded в окне, и мы встретили 0, то left = excluded+1
                 } else {
-                    while ($left < $excluded) {
-                        $left++;
-                        $size--;
-                    }
-                    $excluded = $left;
-                    // $size = 0;
-                    // $left=$right;
-
+                    // $row.=" '0' в окне (на поз. $excluded), left = excluded+1";
+                    $left = $excluded + 1;
+                    // исключаем текущий ноль заново
+                    $excluded = $right;
                 }
             }
-            echo "$right ({$nums[$right]}). $size.  [$left – $right] excluded $excluded\n";
+
+            // echo "$right ({$nums[$right]}). $size. [$left – $right] excluded $excluded  $row\n";
             $right++;
         }
-        if ($excluded==0) {
+        // обработка кейса когда не было нулей
+        if ($excluded<0) {
             $max--;
         }
 
