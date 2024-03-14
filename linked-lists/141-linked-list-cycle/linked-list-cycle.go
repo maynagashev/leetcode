@@ -7,7 +7,6 @@ type ListNode struct {
 
 func hasCycle(head *ListNode) bool {
 	fast, slow := head, head
-	// fmt.Printf("%+v %+v", fast, slow)
 
 	for fast != nil && fast.Next != nil {
 		fast = fast.Next.Next
